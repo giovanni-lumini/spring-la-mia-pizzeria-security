@@ -7,6 +7,7 @@ import org.exercise.spring.spring_pizzeria.model.SpecialOffer;
 import org.exercise.spring.spring_pizzeria.service.IngredientService;
 import org.exercise.spring.spring_pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,9 +33,10 @@ public class PizzaController {
 
     // INDEX
     @GetMapping
-    public String index(Model model) {
+    public String index(Model model, Authentication authentication) {
         List<Pizza> pizze = pizzaService.findAll();
         model.addAttribute("pizze", pizze);
+        model.addAttribute("username", authentication.getName());
         return "pizze/index";
     }
 

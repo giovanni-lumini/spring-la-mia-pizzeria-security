@@ -10,6 +10,9 @@
 <body>
     <!-- importo il frammento header -->
     <th:block th:replace="~{fragments/fragments :: header}"/>
+    <div class="text-center mt-4">
+        <h3 th:text="'User: ' + ${username}"></h3>
+    </div>
 
     <div class="d-flex justify-content-between my-5 mx-3">
         <!-- importo il frammento title -->
@@ -41,12 +44,12 @@
                     <div th:insert="~{fragments/fragments :: button('/pizze/' + *{id}, 'Dettaglio pizza')}"></div>
 
                     <div class="d-flex justify-content-center mt-3 gap-2">
-                        <!-- pagina per modificare la pizza -->
-                        <div>
+                        <!-- pagina per modificare la pizza, solo ADMIN -->
+                        <div sec:authorize="hasAuthority('ADMIN')">
                             <a th:href="@{'/pizze/edit/' + *{id}}" class="btn btn-success">Edit</a>
                         </div>
-                        <!-- eliminare la pizza -->
-                        <div>
+                        <!-- eliminare la pizza, solo ADMIN -->
+                        <div sec:authorize="hasAuthority('ADMIN')">
                             <form th:action="@{'/pizze/delete/' + *{id}}" method="post">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>

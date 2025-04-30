@@ -26,7 +26,7 @@ public class Role {
     private String name;
 
     // many to many
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonBackReference
     private Set<User> users;
 
